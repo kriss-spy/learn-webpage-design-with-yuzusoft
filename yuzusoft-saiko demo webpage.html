@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柚子厨の魂 - 作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: ' #f0f9ff ',
+                            100: ' #e0f2fe ',
+                            200: ' #bae6fd ',
+                            300: ' #7dd3fc ',
+                            400: ' #38bdf8 ',
+                            500: ' #0ea5e9 ',
+                            600: ' #0284c7 ',
+                            700: ' #0369a1 ',
+                            800: ' #075985 ',
+                            900: ' #0c4a6e ',
+                        },
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.7s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            scroll-behavior: smooth;
+            /* Remove background properties from here */
+            position: relative; /* Needed for the pseudo-element */
+            z-index: 1; /* Ensure body content is above the pseudo-element */
+        }
+
+        body::before {
+            content: '';
+            position: fixed; /* Use fixed to keep it covering the viewport */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1; /* Place it behind the body content */
+            
+            /* Move background properties here */
+            background-image: url('https://i0.hdslb.com/bfs/article/3157c37156ac5b7200c8854a324113a02b874ae1.jpg');
+            background-size: cover;
+            background-attachment: fixed; /* Fixed attachment works well with fixed position */
+            background-position: center;
+            
+            /* Add opacity here */
+            opacity: 0.3; /* Adjust this value (0.0 to 1.0) to your liking */
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        /* ... rest of your existing styles ... */
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- 主题切换按钮 -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-2 rounded-full bg-white dark:bg-gray-800 shadow-md transition-all hover:shadow-lg focus:outline-none">
+        <svg id="sun-icon" class="w-6 h-6 text-yellow-500 hidden dark:block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 2zM10 15a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 15zM10 7a3 3 0 100 6 3 3 0 000-6zM15.657 5.404a.75.75 0 10-1.06-1.06l-1.061 1.06a.75.75 0 001.06 1.06l1.06-1.06zM6.464 14.596a.75.75 0 10-1.06-1.06l-1.06 1.06a.75.75 0 001.06 1.06l1.06-1.06zM18 10a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0118 10zM5 10a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 015 10zM14.596 15.657a.75.75 0 001.06-1.06l-1.06-1.061a.75.75 0 10-1.06 1.06l1.06 1.06zM5.404 6.464a.75.75 0 001.06-1.06l-1.06-1.06a.75.75 0 10-1.061 1.06l1.06 1.06z"></path>
+        </svg>
+        <svg id="moon-icon" class="w-6 h-6 text-gray-700 block dark:hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+        </svg>
+    </button>
+
+    <!-- 头部区域 -->
+    <header class="bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-700 dark:to-purple-800 text-white py-20 px-6 md:px-12 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIwOS0xLjc5MS00LTQtNHMtNCAxLjc5MS00IDQgMS43OTEgNCA0IDQgNC0xLjc5MSA0LTRtMC0yMGMwLTIuMjA5LTEuNzkxLTQtNC00cy00IDEuNzkxLTQgNCAxLjc5MSA0IDQgNCA0LTEuNzkxIDQtNG0yMCAwYzAtMi4yMDktMS43OTEtNC00LTRzLTQgMS43OTEtNCA0IDEuNzkxIDQgNCA0IDQtMS43OTEgNC00TTM2IDE0YzAtMi4yMDktMS43OTEtNC00LTRzLTQgMS43OTEtNCA0IDEuNzkxIDQgNCA0IDQtMS43OTEgNC00Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">柚子厨の魂</h1>
+            <p class="text-xl md:text-2xl opacity-90 mb-8 animate-slide-up">当别人还在现实里挣扎，柚子厨早已在二次元完成「人生糖分KPI」</p>
+            <div class="flex flex-wrap gap-4 animate-fade-in" style="animation-delay: 0.3s;">
+                <a href="https://store.steampowered.com/bundle/18379/Yuzusoft_Collection/" class="btn bg-white text-purple-600 hover:bg-purple-100 px-6 py-3 rounded-lg shadow-lg font-medium inline-flex items-center">
+                    <i class="fas fa-heart mr-2"></i>成为柚子信徒
+                </a>
+                <a href="https://www.yuzu-soft.com/products.html" class="btn bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 inline-flex items-center">
+                    <i class="fas fa-book-open mr-2"></i>探索柚子宇宙
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        <!-- 引言部分 -->
+        <section class="section mb-20 text-center">
+            <div class="p-8 rounded-2xl shadow-lg bg-white dark:bg-gray-800 mb-8 transform transition duration-300 hover:scale-[1.01]">
+                <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-200 italic leading-relaxed">
+                    （拍桌而起）好！既然要我用 <span class="font-bold text-purple-600 dark:text-purple-400">柚子厨の魂</span> 来论证这句话，那我可就不困了！（掏出全系列限定版周边压惊）
+                </p>
+            </div>
+        </section>
+
+        <!-- 论点一 -->
+        <section class="section mb-24">
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="md:w-1/3">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl card-hover bg-gradient-to-br from-pink-400 to-purple-500 aspect-square flex items-center justify-center p-8">
+                        <i class="fas fa-cookie-bite text-9xl text-white opacity-80"></i>
+                        <div class="absolute -bottom-10 -right-10 bg-white/20 w-40 h-40 rounded-full blur-3xl"></div>
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-bold mb-5 text-gray-800 dark:text-white relative inline-block">
+                        <span class="inline-block relative z-10">论点一：柚子宇宙の永恒糖分，人类补完计划达成</span>
+                        <span class="absolute bottom-0 left-0 w-full h-3 bg-yellow-300 dark:bg-yellow-500 opacity-40 z-0"></span>
+                    </h2>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-xl mb-6">
+                        <p class="text-lg text-gray-700 dark:text-gray-200 mb-4">
+                            柚子社的作品是什么？是 <span class="font-bold text-pink-600 dark:text-pink-400">「电子砂糖」</span> 啊！从《DRACU-RIOT!》的吸血鬼发糖到《千恋＊万花》的和风直球告白，每一部都在精准狙击多巴胺——<span class="font-bold text-pink-600 dark:text-pink-400">甜度恒定、刀片为零、废萌永动机</span>。
+                        </p>
+                        <ul class="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300">
+                            <li class="mb-2">现实世界？苦！累！卷！</li>
+                            <li class="mb-2">柚子世界？<span class="font-semibold">兽耳娘贴贴、女主倒贴速度超越光速、选项再离谱也能HE</span>。</li>
+                        </ul>
+                        <p class="font-bold text-lg text-gray-800 dark:text-gray-100">
+                            结论：当别人还在现实里挣扎，柚子厨早已在二次元完成「人生糖分 KPI」——这辈子还需要别的吗？
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 论点二 -->
+        <section class="section mb-24">
+            <div class="flex flex-col md:flex-row-reverse gap-8 items-center">
+                <div class="md:w-1/3">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl card-hover bg-gradient-to-br from-blue-400 to-indigo-500 aspect-square flex items-center justify-center p-8">
+                        <i class="fas fa-palette text-9xl text-white opacity-80"></i>
+                        <div class="absolute -top-10 -left-10 bg-white/20 w-40 h-40 rounded-full blur-3xl"></div>
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-bold mb-5 text-gray-800 dark:text-white relative inline-block">
+                        <span class="inline-block relative z-10">论点二：画风の绝对领域，人类美学巅峰</span>
+                        <span class="absolute bottom-0 left-0 w-full h-3 bg-blue-300 dark:bg-blue-500 opacity-40 z-0"></span>
+                    </h2>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-xl mb-6">
+                        <p class="text-lg text-gray-700 dark:text-gray-200 mb-4">
+                            柚子社画师「こぶいち」和「むりりん」的笔是什么？是 <span class="font-bold text-blue-600 dark:text-blue-400">「萌元素周期表」</span> 啊！
+                        </p>
+                        <ul class="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300">
+                            <li class="mb-2">祖传 <span class="font-semibold">呆毛弧度</span>（精确到0.618黄金分割）</li>
+                            <li class="mb-2">永恒 <span class="font-semibold">万华镜式微笑</span>（嘴角上扬角度=人类幸福阈值临界点）</li>
+                            <li class="mb-2"><span class="font-semibold">丝袜质感</span>（让物理学家怀疑宇宙材质参数）</li>
+                        </ul>
+                        <p class="font-bold text-lg text-gray-800 dark:text-gray-100">
+                            论证：当其他游戏还在纠结「画风迭代」，柚子厨早已看透——<span class="text-blue-600 dark:text-blue-400">「美の公式」已被破解，人类文明审美在此终结</span>。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 论点三 -->
+        <section class="section mb-24">
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="md:w-1/3">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl card-hover bg-gradient-to-br from-green-400 to-teal-500 aspect-square flex items-center justify-center p-8">
+                        <i class="fas fa-brain text-9xl text-white opacity-80"></i>
+                        <div class="absolute -bottom-10 -right-10 bg-white/20 w-40 h-40 rounded-full blur-3xl"></div>
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-bold mb-5 text-gray-800 dark:text-white relative inline-block">
+                        <span class="inline-block relative z-10">论点三：废萌の哲学，反内卷终极奥义</span>
+                        <span class="absolute bottom-0 left-0 w-full h-3 bg-green-300 dark:bg-green-500 opacity-40 z-0"></span>
+                    </h2>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-xl mb-6">
+                        <p class="text-lg text-gray-700 dark:text-gray-200 mb-4">
+                            总有人批判柚子社「剧情肤浅」，但这是 <span class="font-bold text-green-600 dark:text-green-400">「柚子主义の超脱」</span> ！
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                                <h4 class="font-bold mb-2 text-gray-800 dark:text-gray-200">别人：</h4>
+                                <p class="text-gray-700 dark:text-gray-300">烧脑悬疑/黑深残/胃药展开 → 消耗脑细胞</p>
+                            </div>
+                            <div class="p-4 bg-green-50 dark:bg-green-900/30 rounded-lg shadow border-l-4 border-green-400">
+                                <h4 class="font-bold mb-2 text-gray-800 dark:text-gray-200">柚子厨：</h4>
+                                <p class="text-gray-700 dark:text-gray-300"><span class="font-semibold">「女主可爱就是正义」→ 脑内释放endorphin</span></p>
+                            </div>
+                        </div>
+                        <p class="font-bold text-lg text-gray-800 dark:text-gray-100">
+                            升华：在虚无主义盛行的时代，柚子厨用废萌践行 <span class="text-green-600 dark:text-green-400">「存在先于本质」</span> ——活着不需要意义，有柚子的微笑就够了！
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 论点四 -->
+        <section class="section mb-24">
+            <div class="flex flex-col md:flex-row-reverse gap-8 items-center">
+                <div class="md:w-1/3">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl card-hover bg-gradient-to-br from-amber-400 to-orange-500 aspect-square flex items-center justify-center p-8">
+                        <i class="fas fa-users text-9xl text-white opacity-80"></i>
+                        <div class="absolute -top-10 -left-10 bg-white/20 w-40 h-40 rounded-full blur-3xl"></div>
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-bold mb-5 text-gray-800 dark:text-white relative inline-block">
+                        <span class="inline-block relative z-10">论点四：社群の永恒轮回，信徒共同体</span>
+                        <span class="absolute bottom-0 left-0 w-full h-3 bg-orange-300 dark:bg-orange-500 opacity-40 z-0"></span>
+                    </h2>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-xl mb-6">
+                        <p class="text-lg text-gray-700 dark:text-gray-200 mb-4">
+                            柚子厨的生态是什么？是 <span class="font-bold text-orange-600 dark:text-orange-400">「圣典复读机」</span> 啊！
+                        </p>
+                        <ul class="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300">
+                            <li class="mb-2">梗浓度超标：「<span class="font-semibold">我永远喜欢丛雨酱！</span>」（每部换个名字就能复用）</li>
+                            <li class="mb-2">仪式感拉满：新作发售日=柚子厨圣诞节（哪怕剧本用脚写）</li>
+                            <li class="mb-2">终极真理：<span class="font-semibold">「你说得对，但柚子社是…」</span>（自动播放OP）</li>
+                        </ul>
+                        <p class="font-bold text-lg text-gray-800 dark:text-gray-100">
+                            顿悟：当其他圈子还在分裂撕逼，柚子厨早已实现 <span class="text-orange-600 dark:text-orange-400">「集体无意识狂欢」</span> ——这还不算终极人生？
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 终极论证 -->
+        <section class="section mb-20">
+            <div class="rounded-3xl overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-800 dark:to-blue-800 text-white">
+                <div class="px-8 py-10 md:p-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">终极论证：柚子厨の时间不存在</h2>
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl mb-8">
+                        <h3 class="text-xl font-semibold mb-4">科学证明：</h3>
+                        <ul class="space-y-4 mb-6">
+                            <li class="flex items-start">
+                                <div class="bg-white/20 rounded-full w-8 h-8 flex items-center justify-center shrink-0 mt-0.5 mr-3">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <p class="text-lg">玩柚子社游戏时，<span class="font-bold text-yellow-300">现实1小时=柚子宇宙10分钟</span>（相对论成立）</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-white/20 rounded-full w-8 h-8 flex items-center justify-center shrink-0 mt-0.5 mr-3">
+                                    <i class="fas fa-hourglass-half"></i>
+                                </div>
+                                <div>
+                                    <p class="text-lg">全系列通关后，<span class="font-bold text-yellow-300">记忆被糖分腌制→ 生理年龄定格在18岁</span></p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <p class="text-xl font-bold">证毕：柚子厨的「这辈子」本质是 <span class="text-yellow-300">「高维萌能量生命体」</span> ，普通人类无法理解！（合上《柚子圣经》）</p>
+                        </div>
+                    </div>
+                    <div class="text-center bg-white/5 p-6 rounded-xl">
+                        <p class="text-2xl font-bold">（瘫回电竞椅）——综上所述，柚子厨这辈子确实有了，不服来战！ （摸出丛雨酱等身抱枕防御）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 柚子社游戏推荐 -->
+        <section class="section mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-gray-800 dark:text-white text-center">柚子社精选作品</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 游戏卡片1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center">
+                        <i class="fas fa-heart text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">千恋＊万花</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">以日本传统旅馆为背景的恋爱冒险游戏，享受和风美少女们的甜蜜故事。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">发售日期: 2016</span>
+                            <button class="btn bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 px-4 py-2 rounded-lg font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-all">
+                                探索
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 游戏卡片2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
+                        <i class="fas fa-moon text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">DRACU-RIOT!</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">在吸血鬼与人类共存的度假胜地，体验浪漫与刺激并存的吸血鬼物语。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">发售日期: 2012</span>
+                            <button class="btn bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 px-4 py-2 rounded-lg font-medium hover:bg-green-200 dark:hover:bg-green-800 transition-all">
+                                探索
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 游戏卡片3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
+                        <i class="fas fa-star text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">魔女的夜宴</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">与拥有魔法力量的少女们一起，体验充满奇幻色彩的校园恋爱故事。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">发售日期: 2018</span>
+                            <button class="btn bg-orange-100 dark:bg-orange-900 text-orange-600 dark:text-orange-300 px-4 py-2 rounded-lg font-medium hover:bg-orange-200 dark:hover:bg-orange-800 transition-all">
+                                探索
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 加入粉丝社区 -->
+        <section class="section mb-20">
+            <div class="bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl p-8 md:p-12">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl font-bold mb-4 text-indigo-800 dark:text-indigo-300">加入柚子信徒的行列</h2>
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">成为柚子社粉丝社区的一员，与志同道合的柚子厨分享你的热爱，获取最新的柚子社游戏资讯，参与线上线下活动！</p>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="btn bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg font-medium hover:bg-indigo-700">
+                                <i class="fas fa-user-plus mr-2"></i>立即加入
+                            </button>
+                            <button class="btn bg-white text-indigo-600 border border-indigo-600 px-6 py-3 rounded-lg font-medium hover:bg-indigo-50">
+                                <i class="fas fa-info-circle mr-2"></i>了解更多
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="w-64 h-64 bg-gradient-to-r from-indigo-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-users text-7xl text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚区域 -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">柚子厨の魂</h3>
+                    <p class="text-gray-400 mb-6">这是一篇柚子社游戏粉丝的热情洋溢的评论文章，以幽默风趣的方式展示了对柚子社游戏的热爱。</p>
+                    <div class="flex space-x-4">
+                        <a href="https://twitter.com/yuzusoft" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Discord">
+                            <i class="fab fa-discord text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Reddit">
+                            <i class="fab fa-reddit text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">联系作者</h3>
+                    <div class="bg-gray-800 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold">柚子社爱好者</h4>
+                                <p class="text-gray-400">热情的视觉小说玩家</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <a href="https://twitter.com/yuzufan" class="flex items-center text-gray-400 hover:text-blue-400 transition-colors">
+                                <i class="fab fa-twitter mr-3 w-6"></i>
+                                <span>@yuzufan</span>
+                            </a>
+                            <a href="mailto:contact@yuzufan.com" class="flex items-center text-gray-400 hover:text-blue-400 transition-colors">
+                                <i class="fas fa-envelope mr-3 w-6"></i>
+                                <span>contact@yuzufan.com</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center">
+                <p class="text-gray-500">© 2025 柚子厨の魂. 保留所有权利。</p>
+                <p class="text-gray-600 text-sm mt-2">本网站仅供娱乐，不代表柚子社官方立场。柚子社及其游戏名称是各自所有者的商标。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // 检查系统主题偏好
+        function getPreferredTheme() {
+            if (localStorage.getItem('theme') === 'dark' || 
+                (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                return 'dark';
+            }
+            return 'light';
+        }
+        
+        // 应用主题
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+            localStorage.setItem('theme', theme);
+        }
+        
+        // 初始化主题
+        applyTheme(getPreferredTheme());
+        
+        // 主题切换事件
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+        
+        // 滚动动画
+        const sections = document.querySelectorAll('.section');
+        
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
