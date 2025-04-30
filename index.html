@@ -50,22 +50,25 @@
     <style>
       /* ...existing code... */
       body::before {
-        /* Existing styles */
+        /* ...existing styles... */
         content: "";
-        position: fixed;
+        position: fixed; /* Use fixed to keep it covering the viewport */
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: -1;
+        z-index: -1; /* Place it behind the body content */
 
-        /* Fix: Use a single background-image declaration with a URL that works in both environments */
+        /* Primary option - local image for local development */
+        background-image: url("./docs/assets/background.jpg");
+        /* Fallback option - remote URL for IDE preview */
         background-image: url("https://i0.hdslb.com/bfs/article/3157c37156ac5b7200c8854a324113a02b874ae1.jpg");
-
-        /* Keep these the same */
         background-size: cover;
+        /* background-attachment: fixed; Fixed attachment works well with fixed position */
         background-position: center;
-        opacity: 0.3;
+
+        /* Add opacity here */
+        opacity: 0.3; /* Adjust this value (0.0 to 1.0) to your liking */
       }
 
       /* Scroll Animation Base State */
